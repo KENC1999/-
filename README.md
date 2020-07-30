@@ -44,11 +44,10 @@
 
 演示效果如下：
 
-<img src="C:\Users\22245\AppData\Roaming\Typora\typora-user-images\image-20200730235611642.png" alt="image-20200730235611642" style="zoom:33%;" /><img src="C:\Users\22245\AppData\Roaming\Typora\typora-user-images\image-20200730235538917.png" alt="image-20200730235538917" style="zoom: 33%;" />
-
-
-
-<img src="C:\Users\22245\AppData\Roaming\Typora\typora-user-images\image-20200730235734318.png" alt="image-20200730235734318" style="zoom:33%;" /><img src="C:\Users\22245\AppData\Roaming\Typora\typora-user-images\image-20200730235810406.png" alt="image-20200730235810406" style="zoom:33%;" />
+![image](https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235538917.png)
+![image](https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235611642.png)
+![image](https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235734318.png)
+![image](https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235810406.png)
 
 ---
 
