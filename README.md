@@ -43,10 +43,11 @@
 ​		退出——CTRL+SHIFT+按下鼠标中键
 
 演示效果如下：
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235538917.png" width="200" height="200" /><br/>
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235611642.png" width="200" height="200" /><br/>
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235734318.png" width="200" height="200" /><br/>
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235810406.png" width="200" height="200" /><br/>
+
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235538917.png" width="300" height="300" /><br/>
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235611642.png" width="300" height="300" /><br/>
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235734318.png" width="300" height="300" /><br/>
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235810406.png" width="300" height="300" /><br/>
 
 ---
 
