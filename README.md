@@ -1,5 +1,8 @@
 # 软件光栅化渲染器
 
+更新：现在一次可以展示多个模型了。
+---
+
 ​	参考[tinyrenderer](https://github.com/ssloy/tinyrenderer/wiki)教程实现了一个简易的软件光栅化渲染器，实现功能包括：
 
 1、Gouraud着色；
@@ -44,13 +47,13 @@
 
 演示效果如下：
 
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235538917.png" width="300" height="300" /><br/>
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235611642.png" width="300" height="300" /><br/>
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235734318.png" width="300" height="300" /><br/>
-<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/image-20200730235810406.png" width="300" height="300" /><br/>
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/output1.png" width="300" height="300" /><br/>
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/output2.png" width="300" height="300" /><br/>
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/output3.png" width="300" height="300" /><br/>
+<img src="https://github.com/KENC1999/SoftwareRasterizer/blob/master/pic/output4.png" width="300" height="300" /><br/>
 
 ---
 
 已知问题:
 
-​		目前每次运行只能加载一个模型，且暂未实现阴影映射和环境光遮蔽，没有进行并行优化。计划把Path Tracing的渲染器写了再回来做。
+​		暂未实现阴影映射和环境光遮蔽，没有进行并行优化。
