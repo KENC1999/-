@@ -54,8 +54,7 @@ Vector3d MyShader::barycentric(Vector3d p) {//计算质心坐标，推导见笔记
 	return bc;
 }
 
-void MyShader::triangle(int width, int height, float* zbuffer, Model *model,TGAImage &image,\
-	vector<Frame_Buffer, aligned_allocator<Frame_Buffer>>& FBuffer, Vector3d* fbuffer, bool tmap, bool nmap) {
+void MyShader::triangle(int width, int height, float* zbuffer, Model *model,Vector3d* fbuffer, bool tmap, bool nmap) {
 	int xmin = inf, ymin = inf, xmax = -inf, ymax = inf;
 	for (int i = 0; i < 3; i++) {//找当前三角形的包围盒
 		xmin = max(0,min(xmin, vt(0, i)));
@@ -84,24 +83,25 @@ void MyShader::triangle(int width, int height, float* zbuffer, Model *model,TGAI
 	}
 }
 
-void MyShader::draw(int width,int height, float* zbuffer, vector<FaceInfo, aligned_allocator<FaceInfo>>& AllFace, Model *model, TGAImage &image,\
-	vector<Frame_Buffer, aligned_allocator<Frame_Buffer>>& FBuffer, Vector3d* fbuffer, DWORD* pMem, bool tmap, bool nmap){
-	for (int i = 0; i < AllFace.size(); i++) {
-		//cout << i << endl;
-		set(AllFace, i);
-		triangle(width, height, zbuffer, model,image,FBuffer,fbuffer,tmap,nmap);//先计算着色存到帧缓存中
-	}
-	/*
-	for (int i = 0; i < FBuffer.size(); i++) {
-		Frame_Buffer Fn = FBuffer[i];
-		putpixel(Fn.x, Fn.y, RGB(Fn.color(0), Fn.color(1), Fn.color(2)));
-	}*/
+void MyShader::set(int width,int height, float* zbuffer, vector<FaceInfo, aligned_allocator<FaceInfo>>& AllFace,Model* model,Vector3d* fbuffer, DWORD* pMem, bool tmap, bool nmap){
+		for (int i = 0; i < AllFace.size(); i++) {
+			//cout << i << endl;
+			set(AllFace, i);
+			triangle(width, height, zbuffer, model,fbuffer, tmap, nmap);//先计算着色存到帧缓存中
+		}
+	//cleardevice();//进行光栅化
+	//for (int x = 0; x < width; x++)
+	//	for(int y=0;y<height;y++)
+	//		pMem[x+y*width]= BGR(RGB(fbuffer[x + (height-y) * width](0), fbuffer[x + (height - y) * width](1), fbuffer[x + (height - y) * width](2)));
+	//FlushBatchDraw();
+}
+
+void MyShader::draw(int width, int height, Vector3d* fbuffer, DWORD* pMem) {
 	cleardevice();//进行光栅化
 	for (int x = 0; x < width; x++)
-		for(int y=0;y<height;y++)
-			pMem[x+y*width]= BGR(RGB(fbuffer[x + (height-y) * width](0), fbuffer[x + (height - y) * width](1), fbuffer[x + (height - y) * width](2)));
+		for (int y = 0; y < height; y++)
+			pMem[x + y * width] = BGR(RGB(fbuffer[x + (height - y) * width](0), fbuffer[x + (height - y) * width](1), fbuffer[x + (height - y) * width](2)));
 	FlushBatchDraw();
-
 }
 
 bool G_Shader::fragment(Vector3d bc, Model *model, bool tmap, bool nmap) {//高洛德Shader类，重写fragment

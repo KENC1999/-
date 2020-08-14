@@ -23,6 +23,7 @@ string name;
 const int width = 600;
 const int height = 600;
 
+vector<Model*> model_list;
 Model *model = NULL;
 camera MyCam;
 float* zbuffer = new float[(2*width + 2)*(2*height + 2)];
@@ -42,11 +43,12 @@ bool bmap = true, tmap = true,bp=true,hold=false;
 
 void getFiles(string path, vector<string>& files);//读取目录下文件名
 bool choose_model();//选择模型
+bool choose_model1(vector<Model*>& model_list);
 void make_3d(DWORD* pMem,bool paint=true);//在屏幕上显示模型
 bool get_action();//获取动作
 std::vector<std::string> splitWithStl(const std::string &str, const std::string &pattern);//字符串分割
 int main()
-{	
+{	/*
 	while (1) {
 		choose_model();
 		if (hold) {
@@ -59,7 +61,22 @@ int main()
 			}
 			closegraph();
 		}
+	}*/
+	while (1) {
+		choose_model1(model_list);
+		//choose_model();
+		if (hold) {
+			initgraph(width, height);
+			DWORD* pMem = GetImageBuffer();
+			bool paint = true;
+			while (hold) {
+				make_3d(pMem, paint);
+				paint = get_action();
+			}
+			closegraph();
+		}
 	}
+
 	return 0;
 }
 bool choose_model() {
@@ -82,10 +99,41 @@ bool choose_model() {
 			return 1;
 		}
 		else if (i == size - 1) {
-			cout << "Cannot find this obj, please try again." << endl;
+			cout << "Cannot find obj, please try again." << endl;
 			return 0;
 		}
 	}
+}
+
+bool choose_model1(vector<Model*>& model_list) {
+	model_list.clear();
+	_getcwd(pbuf, sizeof(pbuf));
+	cout << "Input obj's name:";
+	cin >> name;
+	vector<string> files;
+	string filePath = string(pbuf) + "\\obj\\" + name;
+	//获取该路径下的所有文件  
+	getFiles(filePath, files);
+	char str[30];
+	int size = files.size();
+	for (int i = 0; i < size; i++)
+	{
+		if (files[i].find(".obj")!= files[i].npos) {
+			cout << files[i] << endl;
+			model = new Model(files[i].c_str());
+			model_list.push_back(model);
+		}
+	}
+	cout << model_list.size() << endl;
+	if (model_list.size()) {
+		hold = true;
+		system("cls");
+		return 1;
+	}	
+	else {
+		cout << "Cannot find obj, please try again." << endl;
+		return 0;
+	}	
 }
 
 void getFiles(string path, vector<string>& files)
@@ -152,11 +200,13 @@ void make_3d(DWORD* pMem,bool paint) {
 	now_S->change_lit_prime(MyCam.get_cam_prime().head(3).normalized());
 	fill(zbuffer, zbuffer + (2*width + 2)*(2*height + 2), -0x3f3f3f3f);
 	fill(fbuffer, fbuffer + (2 * width + 2)*(2 * height + 2),Vector3d::Zero(3,1));
-	FBuffer.clear();
-	MyCam.vertex_change(model, AllFace, width, height);
-	now_S->draw(width, height, zbuffer, AllFace, model, image,FBuffer,fbuffer,pMem,tmap,bmap);
+	for (int i = 0; i < model_list.size(); i++) {
+		model = model_list[i];
+		MyCam.vertex_change(model, AllFace, width, height);
+		now_S->set(width, height, zbuffer, AllFace, model, fbuffer, pMem, tmap, bmap);
+	}
+	now_S->draw(width, height, fbuffer, pMem);
 	//image.flip_vertically();
-	//image.write_tga_file("o5.tga");
 	TCHAR wc[MAX_PATH]; string info;
 	info = "mode: ";
 	info.append(bp ? "Blinn-Phong":"Gouraud");

@@ -38,17 +38,17 @@ protected:
 	int faceid;
 	virtual bool fragment(Vector3d bc, Model *model,bool tmap,bool nmap) = 0;//片元着色为虚函数，继承时重写
 
-	void triangle(int width, int height, float* zbuffer, Model *model,TGAImage &image, \
-		vector<Frame_Buffer, aligned_allocator<Frame_Buffer>>& FBuffer, Vector3d* fbuffer, bool tmap, bool nmap);
+	void triangle(int width, int height, float* zbuffer, Model *model,Vector3d* fbuffer, bool tmap, bool nmap);
 	Vector3d barycentric(Vector3d p);//计算给定位置的三角形质心坐标
 	void set(vector<FaceInfo, aligned_allocator<FaceInfo>>& AllFace, int index);//更新Shader数据
 public:
 	
 	MyShader();
 	// ~MyShader();
-	void draw(int width, int height, float* zbuffer, vector<FaceInfo, aligned_allocator<FaceInfo>>& AllFace,Model *model,TGAImage &image,\
-		vector<Frame_Buffer, aligned_allocator<Frame_Buffer>>& FBuffer, Vector3d* fbuffer, DWORD* pMem, bool tmap, bool nmap);//光栅化
-	//virtual Vec4f vertex(int iface, int nthvert) = 0;
+	void set(int width, int height, float* zbuffer, vector<FaceInfo, aligned_allocator<FaceInfo>>& AllFace,Model* model,\
+		 Vector3d* fbuffer, DWORD* pMem, bool tmap, bool nmap);//光栅化
+	void draw(int width, int height, Vector3d* fbuffer, DWORD* pMem);
+
 	void change_lit(Vector3d new_lit) {//从相机中读取变换后的光线向量
 		lit_dir = new_lit;
 	}
