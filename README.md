@@ -1,9 +1,11 @@
 # 软件光栅化渲染器
 
-new features：现在一次可以展示多个模型了。
+New feature：现在可以一次展示多个模型了。
+
 ---
 
-​	参考[tinyrenderer](https://github.com/ssloy/tinyrenderer/wiki)教程实现了一个简易的软件光栅化渲染器，实现功能包括：
+
+参考[tinyrenderer](https://github.com/ssloy/tinyrenderer/wiki)教程实现了一个简易的软件光栅化渲染器，实现功能包括：
 
 1、Gouraud着色；
 
